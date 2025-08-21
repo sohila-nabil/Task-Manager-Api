@@ -152,6 +152,41 @@ Registers a new user in the system.
   
 
 ```
+### 🔹 Login User  
+**POST** `/api/auth/login`  
+
+Authenticates a user with email and password.  
+
+- Returns a **JWT token** on successful login.  
+- Validates password using **bcrypt**.  
+- If credentials are invalid, returns `401 Unauthorized` or `404 Not Found`.  
+
+---
+
+#### 📥 Request Body  
+
+```json
+{
+  "email": "john@example.com",
+  "password": "securePassword123"
+}
+```
+#### 📥 Response Returned
+{
+  "status": "success",
+  "message": "Login successful",
+  "data": {
+    "user": {
+      "id": "64a1234567b890cdef123456",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "member",
+      "imageUrl": "https://example.com/avatar.png",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    }
+  }
+}
+
 
 
 ## 🛠️ Scripts
