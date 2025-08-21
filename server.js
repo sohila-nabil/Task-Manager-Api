@@ -21,7 +21,13 @@ app.use(express.json());
 // routes
 app.use('/api/auth',authRouter)
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Task Manager API");
+});
 
 app.listen(port, () => {
   console.log(`server is running on ${port}`);
 });
+
+
+export default app;
