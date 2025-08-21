@@ -111,20 +111,22 @@ npm run dev
 
 
 ---
-## Endpoints
+## Endpoints  
 
-1 -POST /api/auth/register
-Description
+### 🔹 Register User  
+**POST** `/api/auth/register`  
 
-Registers a new user in the system.
+Registers a new user in the system.  
 
-Supports both member and admin roles.
+- Supports both **member** and **admin** roles.  
+- **Admin role** is assigned only if a valid `adminToken` is provided.  
+- Passwords are **hashed with bcrypt** before saving.  
 
-Admin role is only assigned if a correct adminToken is provided.
+---
 
-Passwords are hashed using bcrypt before saving.
+#### 📥 Request Body  
 
-### Request Body
+```json
 {
   "name": "John Doe",
   "email": "john@example.com",
@@ -132,8 +134,8 @@ Passwords are hashed using bcrypt before saving.
   "adminToken": "optional_admin_token",
   "prfileImageUrl": "https://example.com/avatar.png"
 }
-### Responses
 
+#### 📥 Response
 {
   "status": "success",
   "message": "User registered successfully",
@@ -147,6 +149,7 @@ Passwords are hashed using bcrypt before saving.
     }
   }
 }
+  
 
 ```
 
