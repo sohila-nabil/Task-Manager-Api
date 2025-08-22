@@ -8,7 +8,7 @@
   "host": "https://task-manager-api-eight-bice.vercel.app",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
