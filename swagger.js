@@ -5,7 +5,7 @@ const doc = {
     title: "Task Manager API",
     description: "Simple API documentation",
   },
-  host: "localhost:3000",
+  host: "https://task-manager-api-eight-bice.vercel.app/",
   schemes: ["http"],
 };
 
