@@ -1,0 +1,657 @@
+{
+	"info": {
+		"_postman_id": "19e47bdd-1dc8-4370-8bd1-e1ce205d1cbc",
+		"name": "Task Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34298502"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"kaly\",\r\n    \"email\":\"ka@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"imageUrl\":\"\",\r\n    \"adminToken\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"token\", \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTY3MzU1YTg2Njc2MWEyM2RmMjA2ZiIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE3NTU3NDMwNjd9.Pcb9cqne-5fyK62L-iW28-7RYpgB39Je-vKd-E4-ack \");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ns@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"token\", \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YTY3MzU1YTg2Njc2MWEyM2RmMjA2ZiIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE3NTU3NDMwNjd9.Pcb9cqne-5fyK62L-iW28-7RYpgB39Je-vKd-E4-ack \");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sn@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/profile-update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"profile-update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageUrl",
+									"type": "file",
+									"src": "/C:/web/mern/doctor-appointment-managment/client/src/assets/profile_pic.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageUrl",
+									"type": "file",
+									"src": "/C:/web/mern/doctor-appointment-managment/client/src/assets/profile_pic.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One User By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageUrl",
+									"type": "file",
+									"src": "/C:/web/mern/doctor-appointment-managment/client/src/assets/profile_pic.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/68a67355a866761a23df206f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"68a67355a866761a23df206f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageUrl",
+									"type": "file",
+									"src": "/C:/web/mern/doctor-appointment-managment/client/src/assets/profile_pic.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/68a67355a866761a23df206f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"68a67355a866761a23df206f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Create New Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Complete Authentication Module\",\r\n  \"description\": \"Implement login, signup, and JWT authentication\",\r\n  \"priority\": \"High\",\r\n  \"status\": \"Pending\",\r\n  \"dueDate\": \"2025-08-25\",\r\n  \"assignedTo\": [\"68a7c59bce7f6b208500f4dc\"],\r\n  \"attachments\": [\r\n    \"https://res.cloudinary.com/demo/image/upload/sample.jpg\"\r\n  ],\r\n  \"todoChecklist\": [\r\n    { \"text\": \"Setup JWT\", \"completed\": false },\r\n    { \"text\": \"Test login API\", \"completed\": false }\r\n  ],\r\n  \"progress\": 20\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Complete Authentication Module\",\r\n  \"description\": \"Implement login, signup, and JWT authentication\",\r\n  \"priority\": \"High\",\r\n  \"status\": \"Pending\",\r\n  \"dueDate\": \"2025-08-25\",\r\n  \"assignedTo\": [\"68a70d6a743683c59c95c830\"],\r\n  \"attachments\": [\r\n    \"https://res.cloudinary.com/demo/image/upload/sample.jpg\"\r\n  ],\r\n  \"todoChecklist\": [\r\n    { \"text\": \"Setup JWT\", \"completed\": false },\r\n    { \"text\": \"Test login API\", \"completed\": false }\r\n  ],\r\n  \"progress\": 20\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/tasks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"todoChecklist\": [\r\n    { \"text\": \"Setup JWT\", \"completed\": true },\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/tasks/68a7cbf5ced41b1caca154a1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"68a7cbf5ced41b1caca154a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n                {\r\n                    \"todoChecklist\": [\r\n                {\r\n                    \"text\": \"Setup JWT\",\r\n                    \"completed\": true,\r\n                    \"_id\": \"68a7ddf487e3939b62c4b2ca\"\r\n                },\r\n                {\r\n                    \"text\": \"Test login API\",\r\n                    \"completed\": false,\r\n                    \"_id\": \"68a7ddf487e3939b62c4b2cb\"\r\n                }, {\r\n                    \"text\": \"Test Sign up API\",\r\n                    \"completed\": false,\r\n                    \"_id\": \"68a7ddf487e3939b62c4b2cb\"\r\n                }\r\n            ]\r\n                }\r\n            \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tasks/68a7cbf5ced41b1caca154a1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"68a7cbf5ced41b1caca154a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n                {\r\n                    \"todoChecklist\": [\r\n                {\r\n                    \"text\": \"Setup JWT\",\r\n                    \"completed\": true,\r\n                    \"_id\": \"68a7ddf487e3939b62c4b2ca\"\r\n                },\r\n                {\r\n                    \"text\": \"Test login API\",\r\n                    \"completed\": false,\r\n                    \"_id\": \"68a7ddf487e3939b62c4b2cb\"\r\n                }, {\r\n                    \"text\": \"Test Sign up API\",\r\n                    \"completed\": false,\r\n                    \"_id\": \"68a7ddf487e3939b62c4b2cb\"\r\n                }\r\n            ]\r\n                }\r\n            \r\n"
+						},
+						"url": {
+							"raw": "{{url}}/tasks/68a7cbf5ced41b1caca154a1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"68a7cbf5ced41b1caca154a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"Completed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tasks/status/68a7e449a1cfaafa884f64ce",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"status",
+								"68a7e449a1cfaafa884f64ce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task CheckList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"todoChecklist\": [\r\n                {\r\n                    \"text\": \"Setup JWT\",\r\n                    \"completed\": true,\r\n                    \"_id\": \"68a7e449a1cfaafa884f64cf\"\r\n                },\r\n                {\r\n                    \"text\": \"Test login API\",\r\n                    \"completed\": false,\r\n                    \"_id\": \"68a7e449a1cfaafa884f64d0\"\r\n                }\r\n            ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tasks/checklist/68a7e449a1cfaafa884f64ce",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"checklist",
+								"68a7e449a1cfaafa884f64ce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dashboard Data For Admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Complete Authentication Module\",\r\n  \"description\": \"Implement login, signup, and JWT authentication\",\r\n  \"priority\": \"High\",\r\n  \"status\": \"Pending\",\r\n  \"dueDate\": \"2025-08-25\",\r\n  \"assignedTo\": [\"68a70d6a743683c59c95c830\"],\r\n  \"attachments\": [\r\n    \"https://res.cloudinary.com/demo/image/upload/sample.jpg\"\r\n  ],\r\n  \"todoChecklist\": [\r\n    { \"text\": \"Setup JWT\", \"completed\": false },\r\n    { \"text\": \"Test login API\", \"completed\": false }\r\n  ],\r\n  \"progress\": 20\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/tasks/dashboard-data",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"dashboard-data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dashboard Data For User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Complete Authentication Module\",\r\n  \"description\": \"Implement login, signup, and JWT authentication\",\r\n  \"priority\": \"High\",\r\n  \"status\": \"Pending\",\r\n  \"dueDate\": \"2025-08-25\",\r\n  \"assignedTo\": [\"68a70d6a743683c59c95c830\"],\r\n  \"attachments\": [\r\n    \"https://res.cloudinary.com/demo/image/upload/sample.jpg\"\r\n  ],\r\n  \"todoChecklist\": [\r\n    { \"text\": \"Setup JWT\", \"completed\": false },\r\n    { \"text\": \"Test login API\", \"completed\": false }\r\n  ],\r\n  \"progress\": 20\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/tasks/user-data",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tasks",
+								"user-data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

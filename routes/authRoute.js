@@ -39,7 +39,6 @@
  *         description: Server error
  */
 
-
 /**
  * @swagger
  * /auth/login:
