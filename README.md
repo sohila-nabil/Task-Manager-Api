@@ -7,7 +7,7 @@ It provides authentication, user management, and task management features.
 ## Postman Collection
 You can test all API endpoints using this Postman collection:
 
-👉 [Download collection](./postman/task-manager.postman_collection.json)
+👉 [Download collection](https://github.com/sohila-nabil/Task-Manager-Api/blob/main/postman/Task%20Manager.postman_collection.json)
 
 Or import directly in Postman:
 
