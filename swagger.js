@@ -5,8 +5,8 @@ const doc = {
     title: "Task Manager API",
     description: "Simple API documentation",
   },
-  host: "localhost:3000",
-  schemes: ["http"],
+  host: "https://task-manager-api-eight-bice.vercel.app",
+  schemes: ["https"],
 };
 
 const outputFile = "./swagger-output.json";
