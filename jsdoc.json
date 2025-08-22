@@ -1,0 +1,6 @@
+{
+  "source": {
+    "include": ["controllers", "routes", "models"],
+    "includePattern": ".js$"
+  }
+}

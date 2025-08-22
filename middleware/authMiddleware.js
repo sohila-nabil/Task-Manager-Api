@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
+
+
+
 const protect = async (req, res, next) => {
   const header = req.headers.authorization || req.headers.Authorization;
   if (!header || !header.startsWith("Bearer ")) {
@@ -14,7 +17,9 @@ const protect = async (req, res, next) => {
       .status(401)
       .json({ status: "fail", message: "Not authorized, invalid token" });
   }
+  
   const user = await User.findById(decoded.id);
+  
   if (!user) {
     return res.status(404).json({ status: "fail", message: "User not found" });
   }

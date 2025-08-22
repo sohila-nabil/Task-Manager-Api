@@ -24,7 +24,7 @@ const taskSchema = new mongoose.Schema(
       enum: ["Pending", "In Progress", "Completed"],
       default: "Pending",
     },
-    dueData: {
+    dueDate: {
       type: Date,
       required: true,
     },
@@ -39,7 +39,7 @@ const taskSchema = new mongoose.Schema(
       ref: "User",
     },
     attachments: [{ type: String }],
-    todoChecklist: { todoShema },
+    todoChecklist: [todoShema],
     progress: { type: Number, default: 0 },
   },
   { timestamps: true }
